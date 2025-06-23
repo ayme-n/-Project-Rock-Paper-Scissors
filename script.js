@@ -1,5 +1,6 @@
 
 
+
 function getComputerChoice() {
 
     random = Math.random()
@@ -15,25 +16,14 @@ function getComputerChoice() {
     }
 }
 
-
-function getHumanChoice() {
-
-    let choice = prompt("Enter R,S or P : \n");
-
-    return choice
-}
-
-function game(){
-
 H_score = 0
 C_score = 0
 
-while((H_score !=3)&&(C_score !=3)){
 
-    H = getHumanChoice()
+function play_round(H){
+    
+
     C = getComputerChoice()
-
-    console.log("Pc choosed : " + C )
 
     if (H == "R"){
 
@@ -66,26 +56,70 @@ while((H_score !=3)&&(C_score !=3)){
 
     }
 
+    check()
+
 }
+
+function restart(){
+
+H_score=0
+C_score=0
+score.textContent =""
+winner.textContent = ""
+
+
+}
+
+function check(){
+
+
+score.textContent = "you : " + H_score + ", computer : " + C_score
+    
+
+
 
 if(H_score == 3){
-    console.log("You winner")
+    
+    winner.textContent = "You winner"
+    
 }
 else{
-    console.log("You Loser")
+    if (C_score==3)
+    winner.textContent = "You Looser"
 }
 
+
 }
 
-quit = false;
 
-while(quit != true){
+let Paper = document.querySelector(".Paper")
+let Rock = document.querySelector(".Rock")
+let Scissor = document.querySelector(".Scissor")
+let reset = document.querySelector(".re-play")
 
-    game()
 
-    let q = prompt("Enter q to quit or nothing to keep playing : ")
 
-    if(q =="q"){
-        quit = true
-    }
-}
+ Paper.addEventListener("click",()=>{
+        
+        play_round("P")
+    })
+    Rock.addEventListener("click",()=>{play_round("R")
+    })
+    Scissor.addEventListener("click",()=>{ play_round("S")
+    })
+ reset.addEventListener("click",()=>{
+        
+        restart()
+    })
+
+let result = document.querySelector(".result")
+
+let score = document.createElement("h4")
+
+result.appendChild(score)
+
+
+
+let winner = document.createElement("h1")
+
+result.appendChild(winner)
